@@ -1,12 +1,25 @@
 # Package 001A — First Lab Integration
 
+## Status del Package
+
+| Campo | Valor |
+|-------|-------|
+| **Estado** | **CLOSED** |
+| **Lab Contract** | APPROVED (2025-07-30) |
+| **Lab State** | `explorando` |
+| **Reference Lab** | LABOS-REF-LAB-0001 |
+| **Remediaciones** | 7 non-blocking (OPEN) |
+| **Fecha de cierre** | 2025-07-30 |
+
+---
+
 ## Propósito
 
 Este package define el framework completo de integración de Labs al ecosistema LabOS. [Decisión] Establece el proceso estándar, contratos, ciclo de vida, límites y políticas que aplican a cualquier Lab presente o futuro del portafolio.
 
 ## Caso de Estudio
 
-**Crypto Scalping Core** — Trading cuantitativo, estrategias algorítmicas y herramientas de trading. [Hecho] Estado actual: `idea`. [Hecho]
+**Crypto Scalping Core** — Trading cuantitativo, estrategias algorítmicas y herramientas de trading. [Hecho] Estado actual: `explorando`. [Decisión] (Transición aprobada 2025-07-24, ref: FD-B3-01)
 
 > **Nota:** SentinelOps fue el caso de estudio original en los requirements. Por decisión del fundador (separación corporativa/personal), el caso de estudio activo es Crypto Scalping Core. SentinelOps permanece solo como referencia histórica en documentos ya versionados. [Decisión]
 
@@ -28,6 +41,47 @@ Este package define el framework completo de integración de Labs al ecosistema 
 | 12 | [crypto-scalping-core-integration-backlog.md](./crypto-scalping-core-integration-backlog.md) | Backlog priorizado de acciones de integración |
 | 13 | [package-001a-summary.md](./package-001a-summary.md) | Resumen del package: decisiones y entregables |
 | 14 | [package-001a-review.md](./package-001a-review.md) | Auto-review: completitud y preguntas abiertas |
+
+### Batch 3 — Lab Contract & Compliance (2025-07-24)
+
+| # | Documento | Propósito |
+|---|-----------|-----------|
+| 1 | [founder-decisions-package-001a-batch3.md](./founder-decisions-package-001a-batch3.md) | Decisión FD-B3-01: Lab State → explorando |
+| 2 | [crypto-scalping-core-lab-contract.md](./crypto-scalping-core-lab-contract.md) | Lab Contract formal — 15 secciones (APPROVED) |
+| 3 | [crypto-scalping-core-lab-contract-evidence-map.md](./crypto-scalping-core-lab-contract-evidence-map.md) | Trazabilidad de evidencia por sección del contrato |
+| 4 | [crypto-scalping-core-lab-contract-compliance.md](./crypto-scalping-core-lab-contract-compliance.md) | Evaluación de compliance contra frameworks LabOS |
+| 5 | [crypto-scalping-core-remediation-plan.md](./crypto-scalping-core-remediation-plan.md) | Plan consolidado de remediaciones P2/P3 |
+| 6 | [package-001a-batch3-summary.md](./package-001a-batch3-summary.md) | Resumen de Batch 3 |
+| 7 | [package-001a-batch3-review.md](./package-001a-batch3-review.md) | Auto-review y veredicto: BATCH_3_APPROVED_WITH_REMEDIATION |
+
+### Batch 4 — Reference Lab Freeze & Package Closure (2025-07-30)
+
+| # | Documento | Propósito |
+|---|-----------|-----------|
+| 1 | [founder-decisions-package-001a-batch4.md](./founder-decisions-package-001a-batch4.md) | Decisión FD-B4-01: Lab Contract APPROVED (incondicional) |
+| 2 | [crypto-scalping-core-reference-lab-record.md](./crypto-scalping-core-reference-lab-record.md) | Registro formal como Reference Lab (LABOS-REF-LAB-0001) |
+| 3 | [lab-integration-patterns-v1.md](./lab-integration-patterns-v1.md) | 10 patrones domain-neutral de integración |
+| 4 | [lab-integration-checklist-v1.md](./lab-integration-checklist-v1.md) | Checklist reutilizable: 5 fases (Intake → Closure) |
+| 5 | [reference-lab-eligibility-criteria-v1.md](./reference-lab-eligibility-criteria-v1.md) | Criterios de elegibilidad: 14 obligatorios + 11 descalificadores |
+| 6 | [package-001a-closure-record.md](./package-001a-closure-record.md) | Registro formal de cierre del package |
+| 7 | [package-001a-final-audit.md](./package-001a-final-audit.md) | Auditoría final multi-dimensional |
+| 8 | [package-001a-batch4-summary.md](./package-001a-batch4-summary.md) | Resumen de Batch 4 |
+| 9 | [package-001a-batch4-review.md](./package-001a-batch4-review.md) | Auto-review y veredicto: BATCH_4_APPROVED |
+
+---
+
+## Closure Information
+
+| Campo | Valor |
+|-------|-------|
+| **Final status** | CLOSED |
+| **Closure type** | Normal (todos los gates satisfechos) |
+| **Lab Contract** | APPROVED (incondicional, 2025-07-30) |
+| **Reference Lab** | LABOS-REF-LAB-0001 (ACTIVE) |
+| **Remediaciones** | 7 ítems P2/P3 (OPEN_NON_BLOCKING) |
+| **Audit verdict** | PACKAGE_001A_APPROVED_FOR_CLOSURE_WITH_REMEDIATION |
+| **Reusable outputs** | Patterns (10), Checklist (5 fases), Eligibility Criteria (14+11), Framework, Template |
+| **Next recommended** | Package 003 (Asset System) — cuando el fundador decida |
 
 ## Dependencias
 
