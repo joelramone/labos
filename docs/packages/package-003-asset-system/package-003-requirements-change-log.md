@@ -9,6 +9,9 @@
 | **Versión original** | v1.0 (baseline sin correcciones) |
 | **Versión v1.1** | Correcciones C1–C8 aplicadas por reviewer independiente |
 | **Versión v1.2** | Correcciones C9–C12 aplicadas por Principal Architect (esta revisión) |
+| **Versión v1.3** | Reconciliación normativa C1–C4 posterior al Design Review |
+| **Estado v1.3** | APPROVED por el Founder — 2026-08-12 |
+| **Fecha v1.3** | 2026-08-12 |
 | **Fecha v1.2** | 2025-07-31 |
 
 ---
@@ -198,7 +201,8 @@ Las siguientes correcciones ya fueron aplicadas a la versión v1.1 del requireme
 |---------|---------|----------------------|----------------|
 | v1.1 | C1–C8 | C1, C2, C3, C5 | C4, C6, C7, C8 |
 | v1.2 | C9–C12 | C9, C10, C11, C12 | — |
-| **Total** | **12** | **8** | **4** |
+| v1.3 | V13-C1–V13-C4 | V13-C1, V13-C2, V13-C3, V13-C4 | — |
+| **Total acumulado** | **16** | **12** | **4** |
 
 ### Recuento por tipo de cambio
 
@@ -210,4 +214,21 @@ Las siguientes correcciones ya fueron aplicadas a la versión v1.1 del requireme
 | MERGED | 0 |
 | REMOVED | 0 |
 | SIMPLIFIED | 1 (C2) |
+
+---
+
+## Reconciliación v1.3 — 2026-08-12
+
+[Hecho] La aprobación de v1.2 del 2026-08-05 se preserva como antecedente. El Design Review posterior identificó cuatro contradicciones que requieren v1.3 y nueva aprobación del Founder.
+
+| Change ID | Requirements | Cambio | Autoridad | Status |
+|---|---|---|---|---|
+| V13-C1 | R16.1 | Límite de `nombre` 120 → 80 | Package 000 + ADR-0001 | RESOLVED_IN_V1.3 |
+| V13-C2 | Glosario, R16.1–2, R16.6 | `content_state` y `estado_lifecycle` separados; Tier 1 = 8, Tier 2 = 8 | Package 000 + ADR-0001 + Baseline | RESOLVED_IN_V1.3 |
+| V13-C3 | R5.5 | Fast path verifica las cinco dimensiones R4 sin ceremonia separada | R4 + INV-05 | RESOLVED_IN_V1.3 |
+| V13-C4 | Glosario, R5.4, R16.2 | `sharing_scope` separado de `consumption_state`; exposure basado en uso/riesgo real | ADR-0002 + INV-04/05 | RESOLVED_IN_V1.3 |
+
+Detalle completo: [package-003-requirements-v1.3-change-record.md](./package-003-requirements-v1.3-change-record.md).
+
+[Decisión] Requirements v1.3 fue aprobado explícitamente por el Founder el 2026-08-12. La siguiente fase autorizada es `DESIGN_FINAL_REVIEW_AUTHORIZED`; Tasks e Implementation permanecen `NOT_AUTHORIZED`.
 

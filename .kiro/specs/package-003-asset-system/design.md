@@ -5,20 +5,24 @@
 | Campo | Valor |
 |-------|-------|
 | **Package** | 003 — Asset System |
-| **Versión del diseño** | v1.0 |
-| **Fecha** | 2026-08-05 |
-| **Requirements base** | v1.2 (APPROVED 2026-08-05) |
-| **Estado** | DESIGN_READY_FOR_REVIEW |
+| **Versión del diseño** | v1.2.1 |
+| **Fecha** | 2026-08-21 |
+| **Requirements base** | v1.3 (`APPROVED` 2026-08-12) |
+| **Estado** | APPROVED |
 | **Autor** | Principal Architect (LabOS) |
-| **Aprobación fundador** | PENDIENTE |
+| **Aprobación fundador** | v1.2 APPROVED — 2026-08-13; v1.2.1 PATCH — reapproval not required |
+| **Next phase** | TASKS |
+| **Tasks generation** | AUTHORIZED |
+| **Tasks execution** | WAVES_0_1_ONLY — Founder decision FD-P003-TASKS-001 |
+| **Implementation** | PARTIALLY_AUTHORIZED — documentary scope limited to Waves 0–1 |
 
 ---
 
 ## Introduction
 
-Este documento de diseño traduce los 20 requerimientos aprobados de Package 003 (Asset System v1.2) en una arquitectura documental concreta. El diseño especifica cómo se organizan los 24 documentos planeados, cómo se relacionan entre sí, qué modelos conceptuales gobiernan cada dimensión del Asset System, y cómo los 5 candidatos del Crypto Scalping Core validan el framework antes de su canonización.
+Este documento de diseño traduce los 20 requerimientos aprobados de Package 003 Asset System v1.3 en una arquitectura documental concreta. El diseño especifica cómo se organizan los 24 documentos planeados, cómo se relacionan entre sí, qué modelos conceptuales gobiernan cada dimensión del Asset System y cómo se preservan los casos de validación ya documentados sin promoverlos.
 
-**Naturaleza del diseño:** Package 003 produce documentación normativa y workflows operativos — no software, no bases de datos, no APIs. Por tanto, este diseño arquitectónico es un diseño de documentos, modelos conceptuales y procesos de gobernanza, no un diseño de sistema computacional. La sección de Correctness Properties se omite intencionalmente: PBT no aplica a documentación de gobernanza (sin funciones puras, sin inputs/outputs ejecutables). La validación del diseño se realiza mediante matrices de trazabilidad, verificación de consistencia y los 5 candidatos CSC como ejemplos concretos.
+**Naturaleza del diseño:** Package 003 produce documentación normativa y workflows operativos — no software, no bases de datos, no APIs. Por tanto, este diseño arquitectónico es un diseño de documentos, modelos conceptuales y procesos de gobernanza, no un diseño de sistema computacional. La ausencia de Correctness Properties ejecutables queda registrada como `ACCEPTED_NON_BLOCKING`: PBT no aplica directamente a documentos Markdown sin funciones puras ni inputs/outputs ejecutables. Los acceptance criteria permanecen verificables mediante matrices de trazabilidad y consistencia. Una implementación software futura podrá derivar invariantes ejecutables, pero no se crean tests en esta fase.
 
 **Fuentes autoritativas:** Package 000 README + 007-company-model.md, ADR-0001, ADR-0002, Package 002 knowledge-to-asset-handoff.md, Architecture Baseline v1.0, architecture-change-control-v1.0.md, canonical-domain-map.md.
 
@@ -58,29 +62,31 @@ Los componentes de Package 003 son documentos y modelos conceptuales, no módulo
 
 Package 003 no implementa un modelo de datos en base de datos. El modelo de datos conceptual es el **Asset Record** con tres tiers de metadata (diseñado en detalle en la Sección 2 de la Arquitectura).
 
-**Tier 1 — Intake (9 campos obligatorios al crear un CANDIDATE):**
+**Tier 1 — Intake (8 campos obligatorios aportados por el owner al crear un CANDIDATE; asset_id provisional asignado por el registro):**
 
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
-| asset_id | String (provisional) | Identificador provisional; formato `{LAB}-{TIPO}-{NNN}` al promover |
-| nombre | String ≤120 chars | Nombre descriptivo único dentro del Lab |
+| nombre | String ≤80 chars | Nombre descriptivo único dentro del Lab; límite canónico reconciliado en Requirements v1.3 |
 | tipo | Enum (7 valores) | Uno de: Documento, Template, Dataset, Herramienta, Componente, Framework, Playbook |
 | descripción | String ≤500 chars | Qué problema resuelve en 1–3 oraciones |
 | hipótesis_de_uso | String | Usuario objetivo + contexto de aplicación |
+| content_state | Enum | Estado de contenido de Package 000: borrador, validado o productizado; dimensión distinta de `estado_lifecycle` |
 | originating_Lab | String | Identificador del Lab de origen |
 | source_of_truth | String (path/URL) | Ubicación canónica del Asset |
 | provenance | String / reference | knowledge_id, research_id o referencia externa |
-| fecha_de_creación | ISO 8601 | Fecha de primer registro como CANDIDATE (auto-registrada al crear el CANDIDATE) |
 
-**Tier 2 — Promoción (7 campos adicionales al alcanzar CANONICAL):**
+El registro asigna un `asset_id` provisional al crear la entrada; no es un noveno campo aportado por el owner.
+
+**Tier 2 — Promoción (8 campos adicionales al alcanzar CANONICAL):**
 
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
 | estado_lifecycle | Enum (7 valores) | CANDIDATE, UNDER_REVIEW, VALIDATED, CANONICAL, DEPRECATED, ARCHIVED, REJECTED |
 | versión | SemVer string | MAJOR.MINOR.PATCH; inicia en 1.0.0 |
-| asset_id (definitivo) | String | Formato definitivo `{LAB}-{TIPO}-{NNN}`; formaliza el asset_id provisional de Tier 1 |
 | Asset_Owner | String | Identificador del responsable humano |
+| fecha_de_creación | ISO 8601 | Fecha del registro inicial como CANDIDATE |
 | nivel_de_compartición | Enum (5 valores) | Lab-Private, Lab-Published, LabOS-Shared, Cross-Lab, Public |
+| consumption_state | Enum (2 valores) | NO_ACTIVE_EXTERNAL_CONSUMERS, ACTIVE_EXTERNAL_CONSUMERS |
 | dimensiones_calificación | Object | SATISFECHA/NO_SATISFECHA por cada una de las 5 dimensiones obligatorias (completado ANTES de UNDER_REVIEW) |
 | aprobación_fundador | Object | Decisor + fecha + asset_id + justificación (10–280 chars) |
 
@@ -152,31 +158,31 @@ El Asset Record es la unidad central del Asset System. Se diseña como un regist
 
 #### 2.1 Tier 1: Metadata Obligatoria de Intake (CANDIDATE)
 
-Estos 8 campos deben estar presentes para registrar un Asset_Candidate. Tiempo estimado: 3–5 minutos.
+Estos 8 campos aportados por el owner deben estar presentes para registrar un Asset_Candidate. Tiempo estimado: 3–5 minutos. El registro asigna adicionalmente un `asset_id` provisional controlado por el sistema. Requirements v1.3 reconcilia `content_state` como el campo Estado de Package 000 y lo mantiene separado de `estado_lifecycle`.
 
 | Campo | Propósito | Etapa requerida | Owner | Fuente | Validación | Ejemplo | Relaciones |
 |-------|-----------|----------------|-------|--------|------------|---------|------------|
-| asset_id (provisional) | Identificador provisional único | CANDIDATE | Asset_Owner | Asignado por owner (placeholder si sin formato final) | Formato válido o placeholder documentado | "CSC-HER-001-draft" | Referenciado en provenance de Assets derivados |
-| nombre | Identificar el Asset de forma descriptiva | CANDIDATE | Asset_Owner | Asset_Owner | ≤120 caracteres, único en el Lab | "Optimizador de parámetros por grid search con leaderboard" | Vinculado a tipo en registry |
+| nombre | Identificar el Asset de forma descriptiva | CANDIDATE | Asset_Owner | Asset_Owner | ≤80 caracteres, único en el Lab; límite de Package 000 aplicado por ADR-0001 | "Optimizador de parámetros por grid search con leaderboard" | Vinculado a tipo en registry |
 | tipo | Clasificar según taxonomía canónica | CANDIDATE | Asset_Owner | ADR-0002 | Exactamente uno de 7 tipos canónicos | Herramienta | Determina sharing_scope default vía ADR-0002 |
 | descripción | Explicar qué problema resuelve | CANDIDATE | Asset_Owner | Asset_Owner | ≤500 caracteres; 1–3 oraciones | "Ejecuta búsqueda exhaustiva de parámetros, evalúa cada combinación vía backtester, genera leaderboard CSV con rankings." | Informa hipótesis_de_uso |
 | hipótesis_de_uso | Identificar usuario objetivo y contexto | CANDIDATE | Asset_Owner | Asset_Owner | Usuario objetivo explícito + contexto de aplicación | "Fundador técnico con lab de optimización iterativa que necesita comparar configuraciones de parámetros." | Informa evidencia de reutilización (R4.1) |
+| content_state | Preservar el estado de contenido definido por Package 000 | CANDIDATE | Asset_Owner | Handoff o creación directa | Uno de: borrador, validado, productizado; inicia en borrador para handoff KO→Asset | borrador | Dimensión separada de `estado_lifecycle` |
 | originating_Lab | Registrar Lab de origen | CANDIDATE | Asset_Owner | Lab identifier | Identificador de Lab existente en portafolio | "CryptoScalpingCore" | Determina Canonical_Authority (R6.9) |
 | source_of_truth | Declarar ubicación canónica del Asset | CANDIDATE | Asset_Owner | Asset_Owner | Path o URL verificable dentro del repositorio | "crypto-scalping-core/app/optimization/grid_search.py" | Trigger de NEEDS_REMEDIATION si se invalida (R7.5) |
 | provenance | Trazabilidad a origen | CANDIDATE | Asset_Owner | KO(s) fuente, research_id, o referencia externa | Al menos 1 referencia verificable (knowledge_id, research_id, o URL/referencia externa) | "research_id: CSC-EXP-014 (grid search optimization study)" | Eslabón Asset→KO(s)→Research de la cadena (R7.4) |
 
 #### 2.2 Tier 2: Metadata Adicional Obligatoria para Promoción a CANONICAL
 
-Estos 8 campos adicionales se completan durante el proceso de evaluación y son necesarios antes de la promoción. Se suman a los 8 de Tier 1.
+Estos 8 campos adicionales se completan durante el proceso de evaluación y son necesarios antes de la promoción. Se suman a los 8 de Tier 1. El `asset_id` definitivo refina el identificador provisional asignado por el registro y no se cuenta como metadata adicional.
 
 | Campo | Propósito | Etapa requerida | Owner | Fuente | Validación | Ejemplo | Relaciones |
 |-------|-----------|----------------|-------|--------|------------|---------|------------|
 | estado_lifecycle | Estado de gobernanza actual | CANONICAL | Asset_System | Determinado por proceso de governance | Uno de: CANDIDATE, UNDER_REVIEW, VALIDATED, CANONICAL, DEPRECATED, ARCHIVED, REJECTED | CANONICAL | Central al ciclo de vida (R3) |
 | versión | Versión semántica del Asset | CANONICAL (inicial: 1.0.0) | Asset_Owner | Asset_System (asignado automáticamente) | MAJOR.MINOR.PATCH; inicia en 1.0.0 | 1.0.0 | Referenciada por consumidores para compatibilidad (R8) |
-| asset_id (definitivo) | Identificador estable del Asset | CANONICAL | Asset_Owner | Asset_System | Formato {LAB}-{TIPO}-{NNN}; único globalmente | "CSC-HER-001" | Referenciado en product_attachments, derivados, forks |
 | Asset_Owner | Responsable de mantenimiento y lifecycle | CANONICAL | Canonical_Authority (Fundador) | Designación del Fundador | Identificador humano (no IA); en SOLO = Fundador | "Fundador" | Trigger de ownership transfer si cambia (R6.8) |
-| fecha_de_creación | Fecha de primer registro del Asset (cuándo fue ingresado como CANDIDATE) | CANDIDATE | Asset_System | ISO 8601 auto-registrado al crear el CANDIDATE | Formato ISO 8601 válido | "2026-08-10" | Base de cálculo de ciclos de revisión (R11); se mueve a Tier 1 para capturar la fecha real de ingreso |
+| fecha_de_creación | Fecha de primer registro del Asset (cuándo fue ingresado como CANDIDATE) | CANDIDATE | Asset_System | ISO 8601 auto-registrado al crear el CANDIDATE | Formato ISO 8601 válido | "2026-08-10" | Permanece como campo Tier 2 conforme a R16.2; su valor preserva la fecha real del intake y debe estar completo antes de promoción |
 | nivel_de_compartición | sharing_scope actual | CANONICAL | Asset_Owner con aprobación Fundador | ADR-0002 default + override explícito | Uno de 5 niveles; cambios requieren aprobación Fundador (R18.1) | "LabOS-Shared" | Determina quality gates aplicables (R5.4) y consumidores (R15) |
+| consumption_state | Consumo externo efectivo, separado del scope autorizado | CANONICAL | Asset_System / Asset_Owner | Registro de consumidores activos | NO_ACTIVE_EXTERNAL_CONSUMERS o ACTIVE_EXTERNAL_CONSUMERS | "NO_ACTIVE_EXTERNAL_CONSUMERS" | Determina exposición operativa junto con sharing_scope y dependencias (R5.4) |
 | dimensiones_calificación | Resultado de evaluación de 5 dimensiones obligatorias que gate la transición CANDIDATE → UNDER_REVIEW | UNDER_REVIEW | Asset_Owner + reviewer | Evaluación documentada | SATISFECHA / NO_SATISFECHA por dimensión; fecha de evaluación | "evidencia_reuso: SATISFECHA (Forma B); calidad: SATISFECHA..." | Determina si puede avanzar a UNDER_REVIEW (R4.4) — debe completarse ANTES de la transición CANDIDATE → UNDER_REVIEW |
 | aprobación_fundador | Registro de aprobación para CANONICAL | CANONICAL | Fundador | Decisión explícita documentada | Decisor + fecha + Asset afectado + justificación 10–280 chars | "Aprobado 2026-08-15: ASSET-3 cumple fast path Nivel 1, Forma B con trigger 90d" | Requerida para transición VALIDATED→CANONICAL (R18.1) |
 
@@ -209,7 +215,7 @@ stateDiagram-v2
 
     CANDIDATE --> UNDER_REVIEW : 5 dimensiones obligatorias SATISFECHAS\n+ Fundador inicia evaluación
     CANDIDATE --> REJECTED : irremediable (Fundador decide)\nMotivo documentado requerido
-    CANDIDATE --> VALIDATED : [FAST PATH Nivel 1]\nLab-Private, sin dependencias externas,\naprobación única del Fundador
+    CANDIDATE --> VALIDATED : [FAST PATH Nivel 1]\nsin consumo/dependencias externas ni product_attachment,\nsharing_scope no Public, aprobación única del Fundador
 
     UNDER_REVIEW --> VALIDATED : quality gates de validación cumplidos\n(completitud 5 campos, hipótesis concreta,\nausencia de duplicación)
     UNDER_REVIEW --> REJECTED : quality gates no superados,\nirremediable (Fundador decide)
@@ -220,9 +226,9 @@ stateDiagram-v2
 
     DEPRECATED --> ARCHIVED : sin consumidores activos\n+ 1 ciclo revisión completo (30–180 días)\nO todos consumidores confirmaron migración
 
-    DEPRECATED --> CANDIDATE : [reactivación] nueva evidencia de demanda\nnuevo registro con referencia al original
+    DEPRECATED -.-> CANDIDATE : crear NUEVO registro; no es transición del Asset original
 
-    ARCHIVED --> CANDIDATE : [reactivación] evidencia verificable de demanda\nnuevo registro con referencia al original
+    ARCHIVED -.-> CANDIDATE : crear NUEVO registro; no es transición del Asset original
 
     REJECTED --> [*] : estado terminal — preservado en registro histórico
     ARCHIVED --> [*] : excluido de búsquedas activas — preservado en registro histórico
@@ -231,8 +237,9 @@ stateDiagram-v2
         Fast Path (Nivel 1):
         CANDIDATE → VALIDATED → CANONICAL
         en un único acto de aprobación del Fundador
-        Solo aplica: Lab-Private, sin dependencias
-        externas, sin product_attachment
+        Aplica por exposición efectiva Nivel 1:
+        sin consumo/dependencias externas,
+        sin product_attachment, scope no Public
     end note
 ```
 
@@ -246,8 +253,8 @@ stateDiagram-v2
 | CANONICAL | Aprobado formalmente por el Fundador; gobernado activamente; disponible para consumo según sharing_scope | VALIDATED con aprobación explícita (R3.5) | → DEPRECATED |
 
 **Nota — VALIDATED sin promoción (path de abandono):** Si el Fundador decide no promover un Asset VALIDATED y desea retirarlo del pipeline sin que exista un sucesor canónico, el Asset puede permanecer en VALIDATED indefinidamente hasta que el Fundador tome una decisión. No existe una transición directa VALIDATED → CANDIDATE; si el Fundador quiere eventualmente reactivarlo bajo una nueva evaluación, deberá crear un **nuevo registro de CANDIDATE** con referencia al Asset VALIDATED original. Esta decisión debe documentarse en el registro del Asset original con justificación (incluso si es "diferido sin fecha"). Esta nota cierra el gap identificado en OPT-03 del requirements review.
-| DEPRECATED | En proceso de retiro con plan de migración; aún accesible para consumidores existentes | CANONICAL con condición documentada (R3.6, R12.1) | → ARCHIVED, → CANDIDATE (reactivación) |
-| ARCHIVED | Retirado del registro activo; preservado históricamente; excluido de búsquedas de Assets disponibles | DEPRECATED sin consumidores o con migraciones confirmadas (R3.7, R12.4) | → CANDIDATE (reactivación con nuevo registro) |
+| DEPRECATED | En proceso de retiro con plan de migración; aún accesible para consumidores existentes | CANONICAL con condición documentada (R3.6, R12.1) | → ARCHIVED; nueva evidencia solo puede originar un registro CANDIDATE separado |
+| ARCHIVED | Retirado del registro activo; preservado históricamente; excluido de búsquedas de Assets disponibles | DEPRECATED sin consumidores o con migraciones confirmadas (R3.7, R12.4) | Sin transición saliente; la reactivación crea un registro CANDIDATE separado |
 | REJECTED | Evaluación terminada negativamente; irremediable; preservado históricamente | CANDIDATE o UNDER_REVIEW con decisión Fundador (R3.8) | Ninguna (terminal) |
 
 #### 3.3 Transiciones inválidas
@@ -271,17 +278,22 @@ Si se intenta una transición inválida, el Asset_System rechaza la transición,
 | VALIDATED → CANONICAL | Aprobación explícita Fundador con campos completos: decisor, fecha, Asset afectado, justificación 10–280 chars (R18.1, R18.3) |
 | CANONICAL → DEPRECATED | Al menos 1 condición documentada de R12.1; justificación registrada; notificación a consumidores activos últimos 180 días |
 | DEPRECATED → ARCHIVED | Sin consumidores activos O todos confirmaron migración; mínimo 30 días desde fecha deprecación; máximo 180 días o forzar decisión (R12.4, R12.7) |
-| CANDIDATE → VALIDATED (fast path) | sharing_scope Lab-Private; sin dependencias externas; sin product_attachment; aprobación única Fundador (R3.10, R5.5) |
+| CANDIDATE → VALIDATED (fast path) | Nivel 1 efectivo: `NO_ACTIVE_EXTERNAL_CONSUMERS`, sin dependencias externas, sin product_attachment, sharing_scope distinto de Public; 5 dimensiones R4 verificadas; aprobación única Fundador (R3.10, R5.4–R5.5) |
 
 #### 3.5 Dimensiones ortogonales (NO son estados del ciclo de vida)
 
-Las siguientes tres dimensiones son atributos del Asset Record que existen independientemente del lifecycle state. Un Asset puede ser CANONICAL y Lab-Private simultáneamente. El flag review_required puede activarse sobre un Asset en cualquier lifecycle state sin modificarlo.
+Las siguientes dimensiones son atributos del Asset Record o clasificaciones de evaluación que existen independientemente del lifecycle state. Ninguna agrega estados al lifecycle de siete estados ni se deriva automáticamente de él.
 
 | Dimensión | Valores | Owner del cambio | Trigger de cambio | Impacto en lifecycle |
 |-----------|---------|-----------------|-------------------|---------------------|
 | sharing_scope | Lab-Private, Lab-Published, LabOS-Shared, Cross-Lab, Public | Asset_Owner + Fundador | Decisión explícita del Fundador (R18.1); default por tipo (ADR-0002) | Ninguno directo; determina quality gates (R5.4) |
 | product_attachment | null / {product_id, tipo, fecha} | Asset_Owner + Fundador | Vinculación explícita cuando Asset cumple R14.1 | Ninguno; eleva nivel de exposición a Nivel 3 (R5.4) |
 | review_required | false / {motivo, fecha, KO_id} | Asset_System (activación automática); Asset_Owner (resolución) | KO fuente superseded/deprecated/MAJOR; Forma B a 90 días (R4.6, R20) | Ninguno — lifecycle state permanece sin cambios |
+| content_state | borrador, validado, productizado | Asset_Owner | Evolución del contenido conforme a Package 000 | Ninguno automático; independiente de `estado_lifecycle` |
+| consumption_state | NO_ACTIVE_EXTERNAL_CONSUMERS / ACTIVE_EXTERNAL_CONSUMERS | Asset_System / Asset_Owner | Alta o baja verificable de consumidores externos | Ninguno directo; contribuye al nivel de exposición |
+| sensitivity | pública, interna, confidencial | Asset_Owner + reviewer | Evaluación requerida según exposición o risk override | Ninguno directo; puede elevar gates |
+| value_status | UNPROVEN, EMERGING, DEMONSTRATED | Asset_Owner / reviewer | Evaluación de evidencia de valor definida en R10 | Ninguno directo; informa mantenimiento y deprecación |
+| risk_level | BASE / ELEVATED | Fundador | Risk override por licensing, impacto financiero, seguridad/autenticación o clientes externos | Ninguno directo; puede elevar quality gates |
 
 
 ---
@@ -350,7 +362,7 @@ Las tres dimensiones ortogonales (sharing_scope, product_attachment, review_requ
 flowchart TD
     A[Artefacto en Lab] -->|cumple 5 campos mínimos\n+ señal de reutilización| B[CANDIDATE]
     B --> C{Nivel de\nexposición?}
-    C -->|Nivel 1:\nLab-Private, sin deps externas| D[Fast Path:\nAprobación única Fundador]
+    C -->|Nivel 1 efectivo:\nsin consumo/deps externas,\nsin attachment, scope no Public| D[Fast Path:\n5 dimensiones R4 + aprobación única]
     D --> E[CANONICAL]
     C -->|Nivel 2 o 3| F[Evaluación 5 dimensiones\nobligatorias]
     F --> G{Todas SATISFECHAS?}
@@ -365,7 +377,6 @@ flowchart TD
     M --> O[Fundador revisa y\ndecide aprobación]
     O -->|Aprueba| E
     O -->|No aprueba| P[Permanecer en VALIDATED\ncon feedback documentado]
-    O -->|Irremediable| J
 ```
 
 #### 5.2 Dimensiones de calificación obligatorias (5)
@@ -571,27 +582,28 @@ Cuando un cambio MAJOR reemplaza completamente la funcionalidad de la versión a
 
 | Nivel | Criterio de clasificación | Quality gates requeridos |
 |-------|--------------------------|------------------------|
-| Nivel 1 | sharing_scope Lab-Private + sin dependencias externas + sin product_attachment | Fast path: 5 campos mínimos completos, ≥1 referencia de uso dentro del Lab, aprobación Fundador |
-| Nivel 2 | sharing_scope Lab-Published, LabOS-Shared o Cross-Lab; con dependencias de otros Labs | Gates de Nivel 1 + documentación de uso (propósito, instrucciones, dependencias, ejemplo), licencia explícita, evaluación de sensibilidad, confirmación de mantenibilidad (responsable + frecuencia) |
+| Nivel 1 | `consumption_state=NO_ACTIVE_EXTERNAL_CONSUMERS` + sin dependencias de otros Labs + sin product_attachment + sharing_scope distinto de Public. Incluye Lab-Private y LabOS-Shared autorizado pero aún no consumido externamente | Fast path posible sólo si se cumplen las 5 dimensiones R4; los gates para autorizar un sharing_scope se evalúan separadamente antes del cambio de scope |
+| Nivel 2 | `consumption_state=ACTIVE_EXTERNAL_CONSUMERS` O dependencias de otros Labs; sharing_scope Lab-Published, LabOS-Shared o Cross-Lab; sin product_attachment | Gates de Nivel 1 + documentación de uso (propósito, instrucciones, dependencias, ejemplo), licencia explícita, evaluación de sensibilidad, confirmación de mantenibilidad (responsable + frecuencia) |
 | Nivel 3 | product_attachment activo O sharing_scope Public | Gates de Nivel 2 + estabilidad demostrada (sin cambios MAJOR en ≥1 ciclo de revisión, mínimo 30 días), ownership explícito con identidad registrada, plan de mantenimiento con frecuencia y criterios de deprecación, evaluación de impacto ante deprecación |
 
 > **Nota DC5 — Override de riesgo:** El modelo de 3 niveles de exposición es el mecanismo principal de graduación de quality gates. Sin embargo, un Asset de cualquier nivel de exposición puede requerir evaluación elevada cuando involucra uno o más de los siguientes factores: (a) **datos de origen externo con licencia** (tipo Dataset derivado de fuentes licenciadas — aplica evaluación de licensing independientemente del nivel); (b) **impacto financiero** — si el Asset informa decisiones de trading, inversión o métricas de negocio con impacto económico real; (c) **información de seguridad o autenticación**; (d) **impacto sobre clientes externos**. En estos casos, el Fundador debe aplicar manualmente la evaluación de sensibilidad y licensing (gates de Nivel 2/3) incluso si el Asset es formalmente Nivel 1. Esta es una excepción de risk override aplicada por juicio del Fundador, no un gate automático.
 
 #### 9.2 Fast path (Nivel 1) — detalle
 
-El fast path permite que un Asset Lab-Private sin exposición externa recorra CANDIDATE → VALIDATED → CANONICAL mediante una única aprobación del Fundador que cubre simultáneamente las quality gates de validación y la aprobación final. No existe una evaluación de 5 dimensiones independiente: el Fundador verifica todo en el mismo acto documentado.
+El fast path permite que un Asset de Nivel 1 recorra CANDIDATE → VALIDATED → CANONICAL mediante una única aprobación del Fundador que cubre simultáneamente las quality gates de validación y la aprobación final. Las cinco dimensiones obligatorias de R4 se verifican en ese mismo acto; no se crea una ceremonia o documento de evaluación separado. El fast path reduce profundidad de evidencia, documentación y overhead, pero no elimina ni sustituye dimensiones. La referencia de uso interno no sustituye la evidencia Forma A/B.
 
 **Criterios de elegibilidad para fast path:**
-- sharing_scope Lab-Private (default para Componente y Playbook; explícito para otros tipos)
+- consumption_state NO_ACTIVE_EXTERNAL_CONSUMERS
 - Sin dependencias a recursos de otros Labs
 - Sin product_attachment activo o declarado
-- Sin consumidores externos al Lab de origen
+- sharing_scope distinto de Public
+- Las cinco dimensiones R4 SATISFECHAS, incluyendo Forma A o Forma B
 
-**Output del fast path:** Un registro de aprobación única con: fecha, asset_id provisional, clasificación como Nivel 1, confirmación de 5 campos mínimos, confirmación de ≥1 referencia de uso interno, justificación (10–280 chars).
+**Output del fast path:** Un registro de aprobación única con: fecha, asset_id provisional, clasificación como Nivel 1, confirmación de 5 campos mínimos, resultado de las 5 dimensiones R4, confirmación de ≥1 referencia de uso interno y justificación (10–280 chars).
 
 #### 9.3 Escalación automática de Nivel 1 a Nivel 2
 
-Si un Asset clasificado como Nivel 1 adquiere una dependencia cross-Lab o se vincula a un Product, el Asset_System reclasifica automáticamente el Asset al nivel de exposición correspondiente y requiere que el Asset_Owner complete los quality gates del nuevo nivel antes de que la operación (compartición o vinculación) sea permitida (R5.7).
+Si un Asset clasificado como Nivel 1 adquiere un consumidor externo activo, una dependencia cross-Lab o se vincula a un Product, el Asset_System actualiza `consumption_state` y reclasifica el Asset al nivel de exposición correspondiente. El cambio de sharing_scope por sí solo no prueba consumo; los gates de autorización del scope se verifican antes de permitir ese cambio (R5.7).
 
 La reclasificación no invalida el Asset ni revierte su estado CANONICAL. Solo impone la evaluación de gates adicionales antes de proceder con la operación que eleva la exposición.
 
@@ -637,7 +649,7 @@ El diseño establece que el sharing es **basado en referencia**, no en copia. Lo
 
 1. **Atribución:** Identificar el Asset de origen con su asset_id y Lab propietario en cualquier trabajo que lo referencie.
 2. **Verificación de compatibilidad:** Registrar la versión referenciada y confirmar prueba en el contexto propio antes de usar el Asset en producción.
-3. **Notificación de defectos:** Comunicar al Asset_Owner cualquier defecto encontrado. En contexto SOLO esta obligación se simplifica a registrar el defecto en el Asset record.
+3. **Notificación de defectos:** Comunicar al Asset_Owner cualquier defecto encontrado dentro de los 7 días calendario siguientes a su detección. En contexto SOLO se instrumenta registrando el defecto y su fecha de detección en el Asset record.
 
 #### 10.3 Obligaciones del Asset_Owner hacia consumidores (R9.6)
 
@@ -1089,7 +1101,7 @@ Esta sección aplica el framework de Package 003 a los 5 candidatos del Crypto S
 
 **Clasificación esperada:** `READY_FOR_REVIEW` — ASSET-3 es el candidato más cercano a la promoción. Esfuerzo BAJO: solo se requiere documentar el template implícito como un documento formal.
 
-**Nota de fast path:** Como Template (sharing_scope default LabOS-Shared), no aplica fast path Nivel 1 directamente. Sin embargo, si el Fundador decide inicialmente con sharing_scope Lab-Private, el fast path aplica. Recomendación: proceder con fast path Lab-Private como primer paso; luego escalar a LabOS-Shared con gates de Nivel 2.
+**Nota de fast path:** Como Template, su sharing_scope default es LabOS-Shared. Puede permanecer en Nivel 1 y usar fast path mientras tenga `NO_ACTIVE_EXTERNAL_CONSUMERS`, no posea dependencias externas ni product_attachment, no sea Public, cumpla las cinco dimensiones R4 y no active un risk override. El scope autorizado por sí solo no prueba consumo ni obliga a Nivel 2.
 
 **Gaps menores:**
 1. El template existe de forma implícita — requiere extracción como documento standalone (`asset-candidate-template.md` o equivalente). Esfuerzo estimado: < 1 hora.
@@ -1174,17 +1186,16 @@ Ningún candidato se promueve automáticamente. Toda promoción requiere evaluac
 | Aspecto | Detalle |
 |---------|---------|
 | Etapa de uso | Intake — registro de CANDIDATE |
-| Campos obligatorios | asset_id (provisional), nombre, tipo, descripción, hipótesis_de_uso, originating_Lab, source_of_truth, provenance |
-| Campos opcionales | notas de evaluación preliminar, señal de reutilización inicial, esfuerzo estimado |
+| Campos obligatorios | nombre, tipo, descripción, hipótesis_de_uso, content_state, originating_Lab, source_of_truth, provenance; asset_id provisional asignado por el registro |
+| Campos opcionales / NOT_YET_REQUIRED | Señal de reutilización inicial, esfuerzo estimado, links a la evaluación y vista informativa de metadata futura pendiente. Estos elementos no son obligatorios para intake y no duplican ingreso manual. |
 | Decision owner | Asset_Owner (Fundador en contexto SOLO) |
-| Validación | 8 campos Tier 1 completos; tipo ∈ 7 tipos canónicos; nombre ≤120 chars; descripción ≤500 chars |
+| Validación | 8 campos Tier 1 completos; tipo ∈ 7 tipos canónicos; nombre ≤80 chars; descripción ≤500 chars y 1–3 oraciones; content_state válido |
 | Output status | Asset en estado CANDIDATE registrado en registry |
 
-**Secciones mínimas del template:**
-1. Metadata del candidato (campos Tier 1)
-2. Señal de reutilización (descripción libre de la señal inicial)
-3. Dimensiones obligatorias — evaluación inicial (SATISFECHA / NO_SATISFECHA / EN_EVALUACIÓN por dimensión)
-4. Notas del evaluador
+**Sección mínima y única obligatoria del template:**
+1. Metadata del candidato: exactamente los 8 campos Tier 1 aportados por el owner.
+
+El template puede mostrar, claramente etiquetados como `OPTIONAL` o `NOT_YET_REQUIRED`, una señal inicial de reutilización, esfuerzo estimado, links a `asset-evaluation-template.md` y metadata Tier 2 futura pendiente. No puede requerir resultados de dimensiones de calificación, notas del evaluador, decisiones de promoción ni ningún campo Tier 2 para registrar un CANDIDATE. La evaluación y la preparación de promoción completan la metadata Tier 2 mediante `asset-evaluation-template.md` y/o `asset-promotion-decision-template.md`; no existe doble ingreso manual obligatorio.
 
 #### 20.2 asset-evaluation-template.md
 
@@ -1263,10 +1274,10 @@ Ningún candidato se promueve automáticamente. Toda promoción requiere evaluac
 
 | Estado | Inputs para entrar | Metadata mínima en este estado | Gate de salida | Output del estado |
 |--------|-------------------|-------------------------------|---------------|-------------------|
-| CANDIDATE | Artefacto + 5 campos mínimos + señal reutilización | 8 campos Tier 1 | 5 dimensiones SATISFECHAS → UNDER_REVIEW; fast path → VALIDATED | Candidato registrado |
+| CANDIDATE | Artefacto + 5 campos mínimos + señal reutilización | 8 campos Tier 1 + asset_id provisional del registro | 5 dimensiones SATISFECHAS → UNDER_REVIEW; fast path → VALIDATED | Candidato registrado |
 | UNDER_REVIEW | CANDIDATE con dimensiones evaluadas | Tier 1 + resultado dimensiones | Quality gates validación (completitud, hipótesis, no-duplicación) | Evaluación formal completada |
 | VALIDATED | UNDER_REVIEW con gates cumplidos | Tier 1 + calificación aprobada | Aprobación Fundador + compliance nivel exposure | Asset listo para CANONICAL |
-| CANONICAL | VALIDATED + aprobación Fundador | Tier 1 + Tier 2 completo (8+8 campos) | Condición deprecación documentada → DEPRECATED | Asset activo y gobernado |
+| CANONICAL | VALIDATED + aprobación Fundador | Tier 1 + Tier 2 completos | Condición deprecación documentada → DEPRECATED | Asset activo y gobernado |
 | DEPRECATED | CANONICAL + condición documentada | Tier 1 + Tier 2 + motivo deprecación + notificaciones | Sin consumidores activos + ciclo completo → ARCHIVED | Asset en transición |
 | ARCHIVED | DEPRECATED + migraciones confirmadas | Tier 1 + Tier 2 + historial completo | Nueva evidencia → CANDIDATE (nuevo registro) | Preservado históricamente |
 | REJECTED | CANDIDATE/UNDER_REVIEW + decisión Fundador | Tier 1 + motivo irremediabilidad | — (terminal) | Preservado históricamente |
@@ -1315,7 +1326,7 @@ Esta sección verifica que el diseño cubre todos los requerimientos, no contien
 
 | Req | Cubierto | Sección(es) | Observación |
 |-----|---------|------------|-------------|
-| R1 | ✅ | Sección 2 | 7 entidades × 4 campos; criterio observable de exclusión |
+| R1 | ✅ | Sección 2 | Nombre ≤80; Package 000 `Estado` preservado como content_state |
 | R2 | ✅ | Sección 2.1 (campo tipo), Sección 10.1 | 7 tipos canónicos; defaults sharing_scope per ADR-0002 |
 | R3 | ✅ | Sección 3 | 7 estados + diagrama Mermaid + guardas + transiciones inválidas |
 | R4 | ✅ | Sección 5 | 5 obligatorias (Forma A/B), 6 recomendadas, 4 dependientes madurez |
@@ -1330,13 +1341,13 @@ Esta sección verifica que el diseño cubre todos los requerimientos, no contien
 | R13 | ✅ | Sección 14 | Boundary post-handoff Package 002 + intake + rechazo + preservación KO |
 | R14 | ✅ | Sección 15 | Elegibilidad + 3 tipos contribución + no-transfer + boundary Package 004 |
 | R15 | ✅ | Sección 10, Sección 13.2 | Producer/consumer roles + boundary Package 001A |
-| R16 | ✅ | Secciones 2 + 13 | 8 intake + 8 promotional + 9 optional + reglas de autoridad |
+| R16 | ✅ | Secciones 2 + 13 | Tier 1 = 8, Tier 2 = 8; content_state, lifecycle y consumption separados |
 | R17 | ✅ | Sección 19 | 5 candidatos × 5 dimensiones × clasificación + próximos pasos |
 | R18 | ✅ | Sección 16 | 4 triggers + formatos ligeros SOLO + campos registro + change control |
 | R19 | ✅ | Esta sección (22) | No-redefine + no-software + no-Product Factory; verificado abajo |
 | R20 | ✅ | Sección 4.3, 14.3 | 5 eventos KO (superseded, deprecated, MAJOR, MINOR, disputed) × respuesta |
 
-**Resultado:** Todos los 20 requerimientos están cubiertos. ✅
+**Resultado:** Los 20 requerimientos tienen trazabilidad y conformidad de diseño contra Requirements v1.3. Cobertura 20/20; conflictos arquitectónicos identificados: 0. La conformidad técnica no constituye aprobación del Founder.
 
 #### 22.2 Conflict check — no contradice Architecture Baseline, ADR-0001, ADR-0002
 
@@ -1360,7 +1371,7 @@ Si en la implementación de los documentos se identifica necesidad de cambio al 
 | Aspecto | Verificación | Estado |
 |---------|-------------|--------|
 | Fast path genuinamente ligero | ≤20 min overhead para Nivel 1 | ✅ Sección 9.2 confirma |
-| Intake de CANDIDATE | 3–5 min con 8 campos Tier 1 | ✅ Sección 2.1 confirma |
+| Intake de CANDIDATE | 3–5 min con 8 campos Tier 1; asset_id asignado por registro | ✅ Sección 2.1 confirma |
 | Métricas manuales | ≤60 min/ciclo | ✅ Sección 12.2 confirma con tabla de escala |
 | Aprobación Fundador en formato ligero | Commit message o nota en registro | ✅ Sección 16.2 confirma |
 | No proceso formal multi-persona requerido | Todo operable por 1 persona | ✅ Todos los workflows diseñados para operador único |
@@ -1436,7 +1447,7 @@ Package 003 produce documentación de gobernanza, no software ejecutable. El equ
 
 ## Testing Strategy
 
-**Nota:** Package 003 produce documentación de gobernanza, no software. La propiedad-based testing (PBT) no aplica — no hay funciones puras ni inputs/outputs ejecutables que testear con 100+ iteraciones. La estrategia de validación usa:
+**Correctness Properties warning: `ACCEPTED_NON_BLOCKING`.** Package 003 produce documentación de gobernanza, no software. Property-based testing (PBT) no aplica directamente: no hay funciones puras ni inputs/outputs ejecutables que testear con iteraciones generadas. Los acceptance criteria siguen siendo verificables mediante la estrategia documental siguiente. Una implementación software futura podrá derivar invariantes ejecutables; no se crean tests ahora.
 
 ### Validación por completitud estructural
 
@@ -1466,12 +1477,12 @@ Package 003 produce documentación de gobernanza, no software ejecutable. El equ
 
 ## Design Status
 
-**DESIGN_READY_FOR_REVIEW**
+**DESIGN_APPROVED — EFFECTIVE VERSION v1.2.1**
 
-Este documento está completo y listo para revisión del Fundador. Cubre los 22 objetivos de diseño especificados, los 20 requerimientos aprobados, los 24 documentos planificados y los 5 candidatos CSC. No contiene decisiones de implementación de software, no modifica ADRs existentes y es operacionalmente viable para el contexto SOLO.
+Este documento v1.2 fue aprobado explícitamente por el Founder el 2026-08-13. La versión efectiva v1.2.1 aplica un PATCH de clarificación compatible con Requirements v1.3 y `architecture-change-control-v1.0.md`: corrige únicamente la contradicción interna de la sección 20.1 sin modificar arquitectura, lifecycle, metadata counts ni decisiones aprobadas. El PATCH no requiere reapproval del Founder. Cubre los 22 objetivos de diseño, los 20 requerimientos, los 24 documentos planificados y los casos de validación ya documentados. La aprobación histórica autorizó la generación de Tasks; la decisión posterior FD-P003-TASKS-001 autorizó únicamente la ejecución documental de Waves 0–1. Waves 2–6 permanecen no autorizadas.
 
-Kiro no aprueba este diseño en nombre del Fundador. La aprobación requiere revisión y decisión explícita del Fundador.
+Decision record: `docs/packages/package-003-asset-system/founder-decisions-package-003-design-v1.2.md`.
 
 ---
 
-*Fin del Design Document — Package 003 Asset System v1.0*
+*Fin del Design Document — Package 003 Asset System v1.2.1*

@@ -11,12 +11,12 @@
 | Design | v1.0 `APPROVED` — `FD-P004-DESIGN-001` |
 | Tasks authorization | `FD-P004-TASKS-AUTH-001` |
 | Founder Task Plan approval | `FD-P004-TASKS-001` |
-| Package state | `TASKS_GENERATION_AUTHORIZED` |
-| Task execution / implementation | `W0_COMPLETE / W1_COMPLETE / W2_AUTHORIZED_NOT_STARTED / W3–W7_NOT_AUTHORIZED` / `NOT_AUTHORIZED` |
-| Wave status | W0 `COMPLETE`; W1 `COMPLETE`; W2 `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; W3–W7 `NOT_AUTHORIZED_FOR_EXECUTION` |
-| Tasks | 32 (T004-001–005 `COMPLETE`; T004-006–010 `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; T004-011–032 `NOT_STARTED / NOT_AUTHORIZED_FOR_EXECUTION`) |
+| Package state | `CLOSED` — `FD-P004-CLOSURE-001` |
+| Task execution / implementation | `W0–W7_COMPLETE / PACKAGE_004_CLOSED` / `NOT_AUTHORIZED` |
+| Wave status | W0–W7 `COMPLETE` |
+| Tasks | 32 (T004-001–032 `COMPLETE`) |
 
-T004-001 is `COMPLETE` with evidence in `wave-0-baseline-integrity-record.md`. T004-002–005 are `COMPLETE` with evidence in `wave-1-execution-record.md`; T004-006–010 are `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` under `FD-P004-W2-AUTH-001`; T004-011–032 remain `NOT_STARTED / NOT_AUTHORIZED_FOR_EXECUTION`. The planning states follow Package 003 precedent: `NOT_STARTED`, `BLOCKED`, `COMPLETE`.
+T004-001–031 and W0–W6 are `COMPLETE` with evidence in their wave records. T004-032 and W7 are `COMPLETE` under `FD-P004-W7-AUTH-001`, with evidence in `wave-7-execution-record.md`. The closure candidate was accepted by `FD-P004-CLOSURE-001`; Package 004 is `CLOSED`.
 
 ## TASKS_SOURCE_MAP
 
@@ -34,7 +34,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 ## Task contract legend
 
-- **Boundary:** execution requires an explicit wave decision. T004-001/W0 and T004-002–005/W1 are `COMPLETE`; T004-006–010/W2 are `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; T004-011–032 remain `PLANNED / NOT_AUTHORIZED_FOR_EXECUTION`. Implementation classification appears per Task.
+- **Boundary:** T004-001–032/W0–W7 are `COMPLETE`; Package 004 is `CLOSED` under separate Founder authority. Implementation remains `NOT_AUTHORIZED`.
 - **Prohibited:** always includes real Candidate/Product/attachment creation, upstream mutation, technology selection and unauthorized execution unless a narrower prohibition is stated in addition.
 - **Manual path:** identifies how a human can execute later using governed documents only.
 - **Risk:** planning caution, not Product risk status.
@@ -124,7 +124,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
-| Authorization / status | `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` — `FD-P004-W2-AUTH-001` |
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W2-AUTH-001`; evidence: `wave-2-execution-record.md` |
 | Purpose / type | Realize one/many/shared Asset references and separate external inputs without merging authority; `TEMPLATE` |
 | Requirements / AC | R04, R06; R04.1–R04.4, R06.1–R06.4 |
 | Design / decisions | C03; D005, D006 |
@@ -139,7 +139,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
-| Authorization / status | `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` — `FD-P004-W2-AUTH-001`; start gated by T004-006 `COMPLETE` |
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W2-AUTH-001`; T004-006 start gate satisfied; evidence: `wave-2-execution-record.md` |
 | Purpose / type | Realize read-only consumption of P003 eligibility; `INTERFACE_CONTRACT` |
 | Requirements / AC | R05; R05.1–R05.4; R06.3–R06.4 |
 | Design / decisions | C04; D005 |
@@ -154,7 +154,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
-| Authorization / status | `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` — `FD-P004-W2-AUTH-001`; start gated by T004-006 `COMPLETE` |
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W2-AUTH-001`; T004-006 start gate satisfied; evidence: `wave-2-execution-record.md` |
 | Purpose / type | Realize Asset, external, operational and platform dependencies; `REGISTRY` |
 | Requirements / AC | R18; R18.1–R18.4; R23.1–R23.3 |
 | Design / decisions | C11; D006, D010 |
@@ -169,7 +169,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
-| Authorization / status | `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` — `FD-P004-W2-AUTH-001`; start gated by T004-006–008 `COMPLETE` |
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W2-AUTH-001`; T004-006–008 start gates satisfied; evidence: `wave-2-execution-record.md` |
 | Purpose / type | Realize technology-neutral presentation/delivery manifest; `TEMPLATE` |
 | Requirements / AC | R17; R17.1–R17.4; R22.4 |
 | Design / decisions | C14; D006, D012 |
@@ -184,7 +184,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
-| Authorization / status | `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` — `FD-P004-W2-AUTH-001`; start gated by T004-006 `COMPLETE` |
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W2-AUTH-001`; T004-006 and all other dependencies satisfied; evidence: `wave-2-execution-record.md` |
 | Purpose / type | Realize lineage from Research/Knowledge through Candidate/Product and future P005 handoff; `REGISTRY` |
 | Requirements / AC | R09; R09.1–R09.4; R17.2; R21.1; R25.3 |
 | Design / decisions | C12; D001, D002, D006, D015 |
@@ -201,6 +201,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W3-AUTH-001`; evidence: `wave-3-execution-record.md` |
 | Purpose / type | Realize nine Product-level quality dimensions independently of Asset quality; `MATRIX` |
 | Requirements / AC | R11; R11.1–R11.4 |
 | Design / decisions | C07; D007, D011 |
@@ -215,6 +216,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W3-AUTH-001`; evidence: `wave-3-execution-record.md` |
 | Purpose / type | Realize nine-category aggregate risk, propagation and human acceptance/escalation; `MATRIX` |
 | Requirements / AC | R06, R12; R06.1–R06.4, R12.1–R12.4 |
 | Design / decisions | C08, C19; D007, D008, D012 |
@@ -229,6 +231,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W3-AUTH-001`; evidence: `wave-3-execution-record.md` |
 | Purpose / type | Realize HYPOTHESIZED/EVIDENCED/DEMONSTRATED progression; `TEMPLATE` |
 | Requirements / AC | R13; R13.1–R13.4 |
 | Design / decisions | C09; D007, D011 |
@@ -243,6 +246,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W3-AUTH-001`; evidence: `wave-3-execution-record.md` |
 | Purpose / type | Realize falsifiable non-transactional Product-demand evidence; `TEMPLATE` |
 | Requirements / AC | R14; R14.1–R14.4 |
 | Design / decisions | C10; D007, D011 |
@@ -257,6 +261,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W3-AUTH-001`; T004-011–014 start gate satisfied; evidence: `wave-3-execution-record.md` |
 | Purpose / type | Realize eleven-control readiness without opaque scoring; `MATRIX` |
 | Requirements / AC | R15; R15.1–R15.4; R16.2 |
 | Design / decisions | C06, C19; D007, D008, D009, D011 |
@@ -273,6 +278,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W4-AUTH-001`; evidence: `wave-4-execution-record.md` |
 | Purpose / type | Realize exactly seven states and every approved guarded transition; `WORKFLOW` |
 | Requirements / AC | R03; R03.1–R03.4; R16.3–R16.4; R24.2 |
 | Design / decisions | C05; D003, D004, D009 |
@@ -287,6 +293,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W4-AUTH-001`; T004-016 start gate satisfied; evidence: `wave-4-execution-record.md` |
 | Purpose / type | Realize Founder-confirmed REJECTED history without lifecycle mutation; `TEMPLATE` |
 | Requirements / AC | R03.4, R02.3–R02.4, R25.3–R25.4 |
 | Design / decisions | C01, C05; D002, D003, D004 |
@@ -301,6 +308,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W4-AUTH-001`; T004-016 start gate satisfied; evidence: `wave-4-execution-record.md` |
 | Purpose / type | Realize separate human READY→APPROVED and APPROVED→ACTIVE decisions; `GOVERNANCE_ARTIFACT` |
 | Requirements / AC | R16; R16.1–R16.4; R22.1 |
 | Design / decisions | C05, C19; D004, D008, D009 |
@@ -315,6 +323,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W4-AUTH-001`; evidence: `wave-4-execution-record.md` |
 | Purpose / type | Realize Requirements-defined MAJOR/MINOR/PATCH, supersession and Asset-version review; `TEMPLATE` |
 | Requirements / AC | R10; R10.1–R10.4; R23.1–R23.3 |
 | Design / decisions | C13; D001, D004, D006 |
@@ -329,6 +338,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W4-AUTH-001`; T004-002–019 start gate satisfied; evidence: `wave-4-execution-record.md` |
 | Purpose / type | Realize current Candidate/Product lookup and immutable governance history; `REGISTRY` |
 | Requirements / AC | R01–R02, R08–R10, R18, R23–R25; R25.1–R25.4 |
 | Design / decisions | C01, C02, C12, C13, C15; D001–D004, D006, D010 |
@@ -345,6 +355,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W5-AUTH-001`; evidence: `wave-5-execution-record.md` |
 | Purpose / type | Realize sharing as an orthogonal human decision; `GOVERNANCE_ARTIFACT` |
 | Requirements / AC | R06, R12, R22; R22.1–R22.4 |
 | Design / decisions | C08, C16, C19; D008, D012 |
@@ -359,6 +370,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W5-AUTH-001`; evidence: `wave-5-execution-record.md` |
 | Purpose / type | Realize event/date review triggers without lifecycle automation; `WORKFLOW` |
 | Requirements / AC | R18.4, R23; R23.1–R23.4 |
 | Design / decisions | C11, C15; D004, D010 |
@@ -373,6 +385,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W5-AUTH-001`; T004-022 start gate satisfied; evidence: `wave-5-execution-record.md` |
 | Purpose / type | Realize APPROVED/ACTIVE→DEPRECATED→RETIRED with impact/history; `GOVERNANCE_ARTIFACT` |
 | Requirements / AC | R24; R24.1–R24.4; R23.2–R23.4 |
 | Design / decisions | C05, C17, C19; D004, D008, D010 |
@@ -387,6 +400,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W5-AUTH-001`; T004-021 start gate satisfied; evidence: `wave-5-execution-record.md` |
 | Purpose / type | Realize governed dossier at the P004→P005 boundary; `INTERFACE_CONTRACT` |
 | Requirements / AC | R13–R16, R18, R21–R22; R21.1–R21.4 |
 | Design / decisions | C18, C19; D008, D009, D011, D015 |
@@ -401,6 +415,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W5-AUTH-001`; evidence: `wave-5-execution-record.md` |
 | Purpose / type | Realize operation-based AI assistance boundaries; `MATRIX` |
 | Requirements / AC | R20; R20.1–R20.4; R07.4, R16.2 |
 | Design / decisions | C20; D013 |
@@ -415,6 +430,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W5-AUTH-001`; T004-022 start gate satisfied; evidence: `wave-5-execution-record.md` |
 | Purpose / type | Allow domain quality/risk/dependency evidence without core lifecycle change; `TEMPLATE` |
 | Requirements / AC | R11–R12, R18–R20, R23; applicable R11.1, R12.1, R18.1, R19.2–R19.4 |
 | Design / decisions | C07, C08, C11, C20; D014 |
@@ -429,6 +445,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W5-AUTH-001`; T004-021–026 start gate satisfied; evidence: `wave-5-execution-record.md` |
 | Purpose / type | Integrate formation through retirement using documents only; `WORKFLOW` |
 | Requirements / AC | R02–R03, R05, R07, R11–R16, R19–R25; R19.1–R19.4 |
 | Design / decisions | C01–C20; D002–D015 |
@@ -445,6 +462,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W6-AUTH-001`; evidence: `wave-6-execution-record.md` |
 | Purpose / type | Define ten synthetic documentary cases without real governance effects; `CONTROLLED_VERIFICATION` |
 | Requirements / AC | R02–R06, R09, R11–R18, R21–R25; scenario AC across these Requirements |
 | Design / decisions | C01–C19; D002–D012, D015 |
@@ -459,6 +477,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W6-AUTH-001`; T004-028 gate satisfied; evidence: `wave-6-execution-record.md` |
 | Purpose / type | Plan controlled checks for state/outcome/gate separation; `CONTROLLED_VERIFICATION` |
 | Requirements / AC | R03, R07, R15–R16, R20, R24–R25; all corresponding AC |
 | Design / decisions | C01, C02, C05, C06, C17, C19, C20; D002–D004, D007–D010, D013 |
@@ -473,6 +492,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W6-AUTH-001`; T004-028 gate satisfied; evidence: `wave-6-execution-record.md` |
 | Purpose / type | Plan controlled P003/P005 and permission-boundary checks; `CONTROLLED_VERIFICATION` |
 | Requirements / AC | R04–R06, R12, R17–R18, R21–R22; all corresponding AC |
 | Design / decisions | C03, C04, C08, C11, C14, C16, C18, C19; D005–D006, D008, D012, D015 |
@@ -487,6 +507,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W6-AUTH-001`; T004-028 gate satisfied; evidence: `wave-6-execution-record.md` |
 | Purpose / type | Plan integrated current/history, lineage and no-infrastructure checks; `CONTROLLED_VERIFICATION` |
 | Requirements / AC | R01–R02, R08–R10, R13–R14, R19, R23, R25; all corresponding AC |
 | Design / decisions | C01, C02, C09, C10, C12, C13, C15, C20; D001–D002, D006, D010–D014 |
@@ -503,6 +524,7 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 | Contract field | Plan |
 |---|---|
+| Authorization / status | `AUTHORIZED_FOR_EXECUTION / COMPLETE` — `FD-P004-W7-AUTH-001`; evidence: `wave-7-execution-record.md` |
 | Purpose / type | Reconcile outputs, validation, traceability, gaps and Founder closure readiness; `AUDIT` |
 | Requirements / AC | R01–R25; R01.1–R25.4 |
 | Design / decisions | C01–C20; D001–D015 |
@@ -515,6 +537,6 @@ Precedence: Founder decisions/frozen architecture within scope → approved Requ
 
 ## Plan-level execution boundary
 
-T004-001/W0 and T004-002–005/W1 are COMPLETE. T004-006–010/W2 are authorized but not started. T004-011–032 and W3–W7 remain unauthorized. The DAG supports wave-by-wave authorization and fail-closed downstream blocking. Software implementation, external research and real-world validation Tasks: `0 / 0 / 0`.
+T004-001–032 and W0–W7 are COMPLETE. Package 004 is CLOSED. Software implementation, external research and real-world validation Tasks: `0 / 0 / 0`.
 
-Approved baseline: v1.0 under `FD-P004-TASKS-001`. Task semantics remain unchanged. Next safe action: `PACKAGE_004_WAVE_2_EXECUTION`.
+Approved baseline: v1.0 under `FD-P004-TASKS-001`. Task semantics remain unchanged. T004-001–032/W0–W7 are COMPLETE; Package 004 is `CLOSED` under `FD-P004-CLOSURE-001`. Implementation remains `NOT_AUTHORIZED`.

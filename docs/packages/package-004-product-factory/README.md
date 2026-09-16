@@ -10,7 +10,7 @@ Establecer el proceso de productización: cómo un activo se transforma en un pr
 
 Founder decision: [FD-P004-ACTIVATION-001](../../architecture/package-004-activation-decision.md), effective 2026-09-02.
 
-Requirements v1.0 is approved under `FD-P004-REQ-001`. Design v1.0 is approved under [FD-P004-DESIGN-001](./design-founder-decision.md). [FD-P004-TASKS-AUTH-001](./tasks-authorization-decision.md) authorized Tasks creation/planning; W0 and W1 are `COMPLETE`. W2 is `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` under `FD-P004-W2-AUTH-001`. W3–W7, implementation, real Product Candidates, real Products, Asset attachments, Product approval and commercialization remain unauthorized.
+Requirements v1.0, Design v1.0 and Task Plan v1.0 remain approved. W0–W7 and T004-001–032 are `COMPLETE`. [FD-P004-CLOSURE-001](./package-004-closure-record.md) records `APPROVE_PACKAGE_004_CLOSURE`; Package 004 is `CLOSED`. Implementation remains unauthorized.
 
 Activation trigger `AT_LEAST_3_ASSETS_IN_VALIDATED`: `SATISFIED` by ASSET-1, ASSET-2 and ASSET-3. All remain `NOT_CANONICAL`; trigger satisfaction does not establish attachment eligibility.
 
@@ -20,10 +20,16 @@ Activation trigger `AT_LEAST_3_ASSETS_IN_VALIDATED`: `SATISFIED` by ASSET-1, ASS
 |---|---|
 | W0 | `COMPLETE` |
 | W1 | `COMPLETE` |
-| W2 | `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` |
-| W3–W7 | `NOT_AUTHORIZED_FOR_EXECUTION` |
+| W2 | `COMPLETE` |
+| W3 | `COMPLETE` |
+| W4 | `COMPLETE` |
+| W5 | `COMPLETE` |
+| W6 | `COMPLETE` |
+| W7 | `COMPLETE` |
 | Implementation | `NOT_AUTHORIZED` |
-| Next safe action | `PACKAGE_004_WAVE_2_EXECUTION` |
+| Package 004 | `CLOSED` — `FD-P004-CLOSURE-001` |
+| Closure candidate | `SUPERSEDED_BY_CLOSURE` |
+| Next safe action | `NONE_AUTOMATIC — AWAIT_FOUNDER_DIRECTION` |
 
 The dated dispositions below preserve the action that was next at each historical checkpoint. Any earlier next-action statement that differs from the current-state pointer above is `HISTORICAL / SUPERSEDED`.
 
@@ -122,4 +128,120 @@ Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_W
 - W3–W7: `NOT_AUTHORIZED_FOR_EXECUTION`; implementation: `NOT_AUTHORIZED`.
 - Product Candidates / Products / attachments / Asset changes created by this decision: `0 / 0 / 0 / 0`.
 
-Next safe action: `PACKAGE_004_WAVE_2_EXECUTION`. Do not execute automatically.
+Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_WAVE_2_EXECUTION`.
+
+## Wave 2 execution disposition — 2026-09-13
+
+- [Wave 2 execution record](./wave-2-execution-record.md): `PACKAGE_004_WAVE_2_EXECUTION_COMPLETE` with independent verdict `PACKAGE_004_WAVE_2_APPROVE`.
+- T004-006–010 and W2: `COMPLETE`; dependency violations and orphan outputs: `0 / 0`.
+- Created five blank `TEMPLATE — NOT_A_GOVERNED_INSTANCE` artifacts for composition, P003 eligibility consumption, dependencies, packaging and provenance.
+- P003 remains authoritative; Asset lifecycle changes / attachments / CANONICAL promotions: `0 / 0 / 0`.
+- W3–W7 remain `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_WAVE_3_AUTHORIZATION_DECISION`.
+
+## Wave 3 authorization disposition — 2026-09-13
+
+- [Wave 3 authorization decision](./wave-3-authorization-decision.md): `APPROVE_PACKAGE_004_WAVE_3_AUTHORIZATION` under `FD-P004-W3-AUTH-001`.
+- W0–W2: `COMPLETE`; W2 independent verdict `PACKAGE_004_WAVE_2_APPROVE`; blockers and dependency violations `0 / 0`.
+- W3/T004-011–015: `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; internal gate requires T004-011–014 `COMPLETE` before T004-015.
+- W3 is documentary only; controlled fixtures and real-world activity remain unauthorized.
+- W4–W7 remain `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_WAVE_3_EXECUTION`.
+
+## Wave 3 execution disposition — 2026-09-14
+
+- [Wave 3 execution record](./wave-3-execution-record.md): `PACKAGE_004_WAVE_3_EXECUTION_COMPLETE` with independent verdict `PACKAGE_004_WAVE_3_APPROVE`.
+- T004-011–015 and W3: `COMPLETE`; dependency violations and orphan outputs: `0 / 0`.
+- Created five blank `TEMPLATE — NOT_A_GOVERNED_INSTANCE` artifacts for Product quality, Product risk, Product Value, Demand Validation and Product readiness.
+- Controlled fixtures, real-world validation, real entities, decisions and lifecycle transitions: `0`.
+- W4–W7 remain `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_WAVE_4_AUTHORIZATION_DECISION`.
+
+## Wave 4 authorization disposition — 2026-09-14
+
+- [Wave 4 authorization decision](./wave-4-authorization-decision.md): `APPROVE_PACKAGE_004_WAVE_4_AUTHORIZATION` under `FD-P004-W4-AUTH-001`.
+- W0–W3: `COMPLETE`; W3 independent verdict `PACKAGE_004_WAVE_3_APPROVE`; blockers, dependency violations and unexpected writes `0 / 0 / 0`.
+- W4/T004-016–020: `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; T004-016/T004-019 precede T004-017/T004-018, and T004-020 is last.
+- W4 is documentary only; controlled fixtures and real-world activity remain unauthorized.
+- W5–W7 remain `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_WAVE_4_EXECUTION`.
+
+## Wave 4 execution disposition — 2026-09-14
+
+- [Wave 4 execution record](./wave-4-execution-record.md): `PACKAGE_004_WAVE_4_EXECUTION_COMPLETE` with independent verdict `PACKAGE_004_WAVE_4_APPROVE`.
+- T004-016–020 and W4: `COMPLETE`; dependency violations, orphan outputs and unexpected writes: `0 / 0 / 0`.
+- Created five blank documentary artifacts for lifecycle guards, terminal Candidate outcome, separate approval/activation events, Product version/compatibility and the manual Product Registry.
+- Controlled fixtures, real entities/events/transitions/Registry entries, software, persistence and automation: `0`.
+- W5–W7 remain `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action at that checkpoint, now `SUPERSEDED`: W5 authorization decision only.
+
+## Wave 5 authorization disposition — 2026-09-14
+
+- [Wave 5 authorization decision](./wave-5-authorization-decision.md): `APPROVE_PACKAGE_004_WAVE_5_AUTHORIZATION` under `FD-P004-W5-AUTH-001`.
+- W0–W4: `COMPLETE`; W4 independent verdict `PACKAGE_004_WAVE_4_APPROVE`; blockers, dependency violations, orphan outputs and unexpected writes: `0 / 0 / 0 / 0`.
+- W5/T004-021–027: `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; execution must follow the approved four-layer DAG.
+- W5 is documentary only. Controlled fixtures, implementation, external research, real-world validation and real governed entities/actions remain unauthorized.
+- W6–W7 remain `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_WAVE_5_EXECUTION`.
+
+## Wave 5 execution disposition — 2026-09-14
+
+- [Wave 5 execution record](./wave-5-execution-record.md): `PACKAGE_004_WAVE_5_EXECUTION_COMPLETE` with independent verdict `PACKAGE_004_WAVE_5_APPROVE`.
+- T004-021–027 and W5: `COMPLETE`; dependency violations, orphan outputs and unexpected writes: `0 / 0 / 0`.
+- Created seven blank documentary artifacts for sharing, review/freshness, deprecation/retirement, Product→Revenue handoff, AI permissions, domain extension and manual-first operation.
+- Controlled fixtures, real entities/actions, Asset changes, downstream activation, implementation, external research and real-world validation: `0`.
+- W6–W7 remain `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action at that checkpoint, now `SUPERSEDED`: `PACKAGE_004_WAVE_6_AUTHORIZATION_DECISION`.
+
+## Wave 6 authorization disposition — 2026-09-14
+
+- [Wave 6 authorization decision](./wave-6-authorization-decision.md): `APPROVE_PACKAGE_004_WAVE_6_AUTHORIZATION` under `FD-P004-W6-AUTH-001`.
+- W0–W5: `COMPLETE`; W5 independent verdict `PACKAGE_004_WAVE_5_APPROVE`; blockers, dependency violations, orphan outputs and unexpected writes: `0 / 0 / 0 / 0`.
+- W6/T004-028–031: `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; T004-028 must create the ten isolated synthetic fixtures before T004-029–031 verification.
+- W6 classification: controlled verification `4`; documentary/software/external research/real-world validation `0 / 0 / 0 / 0`.
+- W7 remains `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action, now `SUPERSEDED`: `PACKAGE_004_WAVE_6_EXECUTION`.
+
+## Wave 6 execution disposition — 2026-09-14
+
+- [Wave 6 execution record](./wave-6-execution-record.md): `PACKAGE_004_WAVE_6_EXECUTION_COMPLETE`; independent verdict `PACKAGE_004_WAVE_6_APPROVE`.
+- T004-028–031 and W6: `COMPLETE`; fixtures synthetic `10/10`; verification `PASS 36 / FAIL 0 / GAP 0`.
+- Dependency violations, orphan outputs, terminology inconsistencies and unexpected writes: `0 / 0 / 0 / 0`.
+- W7 remains `NOT_AUTHORIZED_FOR_EXECUTION`; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action, now `SUPERSEDED`: `PACKAGE_004_WAVE_7_AUTHORIZATION_DECISION`.
+
+## Wave 7 authorization disposition — 2026-09-14
+
+- [Wave 7 authorization decision](./wave-7-authorization-decision.md): `APPROVE_PACKAGE_004_WAVE_7_AUTHORIZATION` under `FD-P004-W7-AUTH-001`.
+- W0–W6: `COMPLETE`; W6 verdict `PACKAGE_004_WAVE_6_APPROVE`; verification `PASS 36 / FAIL 0 / GAP 0 / BLOCKERS 0`.
+- W7/T004-032: `AUTHORIZED_FOR_EXECUTION / NOT_STARTED`; documentary audit/closure-candidate preparation only.
+- Package 004 is not closed; implementation remains `NOT_AUTHORIZED`.
+
+Historical next safe action, now `SUPERSEDED`: `PACKAGE_004_WAVE_7_EXECUTION`.
+
+## Wave 7 execution disposition — 2026-09-14
+
+- [Wave 7 execution record](./wave-7-execution-record.md): T004-032/W7 `COMPLETE`; verdict `PACKAGE_004_WAVE_7_APPROVE`.
+- Coverage: Requirements `25/25`; AC `100/100`; Design `20/20`; decisions `15/15`; Tasks `32/32`.
+- Package 004 is `PACKAGE_004_CLOSURE_CANDIDATE_READY`, not closed. Implementation remains `NOT_AUTHORIZED`.
+- Cycles/orphans/dependency violations/gate bypasses/unexpected writes: `0 / 0 / 0 / 0 / 0`.
+
+Historical next safe action, now `SUPERSEDED`: `PACKAGE_004_CLOSURE_DECISION`.
+
+## Package 004 closure disposition — 2026-09-15
+
+- [Closure record](./package-004-closure-record.md): `APPROVE_PACKAGE_004_CLOSURE` under `FD-P004-CLOSURE-001`.
+- Package 004: `CLOSED`; W0–W7 and T004-001–032: `COMPLETE`.
+- Implementation remains `NOT_AUTHORIZED`; Packages 005/006/007 remain `DORMANT`.
+- ASSET-1/2/3 remain `VALIDATED / NOT_CANONICAL / NOT_ATTACHABLE`; Architecture Freeze remains `PRESERVED`.
+
+Next safe action: `NONE_AUTOMATIC — AWAIT_FOUNDER_DIRECTION`.

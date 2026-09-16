@@ -168,7 +168,7 @@ La separación es clara por horizonte temporal y tipo de decisión. [Hecho] No h
 ## Cross-references
 
 - [founder-decisions-package-001a-batch1.md](./founder-decisions-package-001a-batch1.md) — Decisiones que confirman estos boundaries
-- [lab-boundaries.md](./lab-boundaries.md) — 4 clasificaciones de boundary canónicas
+- `lab-boundaries.md` — HISTORICAL_REFERENCE_MISSING; referencia histórica preservada sin inventar reemplazo
 - [crypto-scalping-core-lab-profile.md](./crypto-scalping-core-lab-profile.md) — Perfil factual
 - [crypto-scalping-core-readiness-assessment.md](./crypto-scalping-core-readiness-assessment.md) — Evaluación de readiness
 - [Package 002 — knowledge-boundaries.md](../package-002-knowledge-architecture/knowledge-boundaries.md) — Boundaries de conocimiento

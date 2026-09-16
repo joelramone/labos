@@ -1,0 +1,12 @@
+strategy: controlled_stub
+data: tests/asset-validation/asset-1-controlled-fixture.csv
+timeframe: 1m
+output: tests/asset-validation/asset-2-controlled-leaderboard.csv
+min_trades: 0
+parameters:
+  take_profit_pct:
+    - 0.01
+    - 0.02
+  stop_loss_pct:
+    - 0.005
+    - 0.01

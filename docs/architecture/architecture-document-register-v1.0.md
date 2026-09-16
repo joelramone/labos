@@ -107,21 +107,31 @@ Registro completo y categorizado de todos los documentos significativos del ecos
 |---|-----|-----------|------|-----------|--------|----------|---------|
 | 39 | REG-039 | Research Methodology (20+ docs) | docs/packages/package-001-research-methodology/ | CANONICAL | CLOSED | ✅ Sí | No (INV-10) |
 
+### Post-Baseline Package and Roadmap Records
+
+| # | ID | Documento | Ruta | Categoría | Status | Baseline | Mutable |
+|---|-----|-----------|------|-----------|--------|----------|---------|
+| 40 | REG-040 | Package 003 — Asset System | docs/packages/package-003-asset-system/ | CANONICAL | CLOSED | No — post-baseline extension; formal baseline reconciliation pending | No (INV-10) |
+| 41 | REG-041 | Post-Package 003 Roadmap Reconciliation | docs/architecture/post-package-003-roadmap-reconciliation.md | SUPPORTING | PLANNING | No | Sí — roadmap governance |
+| 42 | REG-042 | Future Infrastructure Register | docs/architecture/future-infrastructure-register.md | SUPPORTING | FUTURE / DORMANT | No | Sí — trigger registry |
+| 43 | REG-043 | Post-Package 003 Roadmap Review | docs/architecture/post-package-003-roadmap-review.md | SUPPORTING | REVIEWED | No | Sí — append-only review evidence |
+| 44 | REG-044 | Package 004 — Product Factory | docs/packages/package-004-product-factory/ | CANONICAL | CLOSED — FD-P004-CLOSURE-001 | No — post-baseline extension | No (INV-10) |
+
 ---
 
 ## Resumen por Categoría
 
 | Categoría | Cantidad | En Baseline | Mutable sin ADR |
 |-----------|----------|-------------|-----------------|
-| CANONICAL | 23 | 23 | No |
+| CANONICAL | 25 | 23 | No |
 | GOVERNING | 5 | 5 | No |
-| SUPPORTING | 7 | 5 | Sí (con trazabilidad) |
+| SUPPORTING | 10 | 5 | Sí (con trazabilidad) |
 | OPERATIONAL | 4 | 0 | Sí |
 | HISTORICAL | 1 | 1 | No (INV-10) |
 | PROPOSED | 0 | 0 | — |
-| **TOTAL** | **39** | **34** | — |
+| **TOTAL** | **44** | **34** | — |
 
-[Hecho] 34 documentos (o grupos documentales) son parte del Architecture Baseline v1.0. 5 documentos operacionales están fuera del baseline pero son gestionados.
+[Hecho] 34 documentos (o grupos documentales) permanecen en Architecture Baseline v1.0. Packages 003 and 004 are CLOSED post-baseline canonical extensions; the three post-P003 roadmap records are supporting and do not modify the frozen Baseline. Architecture Freeze remains PRESERVED.
 
 ---
 

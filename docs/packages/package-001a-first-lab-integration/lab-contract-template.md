@@ -379,7 +379,7 @@ Definir la cadencia y criterios de evaluación periódica del Lab. [Decisión] I
 ## Cross-references
 
 - [lab-integration-framework.md](./lab-integration-framework.md) — Principios de integración
-- [lab-boundaries.md](./lab-boundaries.md) — Clasificaciones de boundary
+- `lab-boundaries.md` — HISTORICAL_REFERENCE_MISSING; referencia histórica preservada sin inventar reemplazo
 - [ADR-0002](../../decisions/0002-asset-taxonomy-consolidation.md) — Taxonomía de activos (Sección 6)
 - [Package 000 — 012-portfolio-model.md](../package-000-foundation/012-portfolio-model.md) — Lab States
 - [Architecture Baseline v1.0](../../architecture/architecture-baseline-v1.md) — Governance nivel SOLO

@@ -4,11 +4,12 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Documento** | Revisión de Requerimientos v1.2 |
+| **Documento** | Revisión vigente de Requirements v1.3 (incluye revisión histórica v1.2) |
 | **Package** | 003 — Asset System |
-| **Fecha** | 2025-07-31 |
+| **Fecha revisión vigente** | 2026-08-12 |
 | **Revisor** | Principal Architect (LabOS) |
-| **Versión revisada** | requirements.md v1.1 (con correcciones C1–C8) |
+| **Versión vigente revisada** | requirements.md v1.3 — APPROVED |
+| **Revisión histórica preservada** | v1.2, basada en requirements.md v1.1 con correcciones C1–C8 |
 | **Baseline** | LABOS-ARCH-BASELINE-001 |
 
 ---
@@ -267,6 +268,51 @@ El documento de requerimientos v1.1 es apto para aprobación del fundador con la
 - Ningún founder decision adicional es necesario más allá de la aprobación del documento corregido.
 
 El documento está listo para la firma del fundador una vez aplicadas las correcciones C9–C12.
+
+---
+
+## 20. Re-review de reconciliación v1.3 — 2026-08-12
+
+| Campo | Valor |
+|---|---|
+| Version reviewed | Requirements v1.3 |
+| Previous approved version | v1.2 — APPROVED 2026-08-05 |
+| Trigger | Package 003 Design Architectural Review |
+| Result | `REQUIREMENTS_V1.3_READY_FOR_FOUNDER_APPROVAL` |
+| Founder approval | `PENDING` |
+| Tasks | `NOT_AUTHORIZED` |
+| Implementation | `NOT_AUTHORIZED` |
+
+### Conflict closure
+
+| Conflict | Verification | Status |
+|---|---|---|
+| C1 — 80 vs 120 | R1.2 and R16.1 now both require 80 | RESOLVED |
+| C2 — content/lifecycle state | Tier 1 maps Package 000 Estado to `content_state`; Tier 2 separately records `estado_lifecycle`; no derivation | RESOLVED |
+| C3 — fast path | R5.5 explicitly verifies all five R4 dimensions in one lightweight act | RESOLVED |
+| C4 — LabOS-Shared exposure | `sharing_scope` and `consumption_state` are independent; all Assets map to one of three exposure levels | RESOLVED |
+
+### Coverage and architecture verdict
+
+- Requirements traced: 20/20.
+- Unresolved architecture conflicts: 0.
+- Architecture Baseline changes required: 0.
+- ADR required: no; the revision restores conformance with existing authorities and resolves internal Package 003 contradictions.
+
+**Verdict:** `REQUIREMENTS_V1.3_READY_FOR_FOUNDER_APPROVAL`. This review does not approve Requirements on behalf of the Founder.
+
+### Founder approval — 2026-08-12
+
+| Campo | Valor |
+|---|---|
+| Founder decision | `APPROVE` |
+| Current Requirements status | `REQUIREMENTS_APPROVED` |
+| Approved version | v1.3 |
+| Next authorized phase | `DESIGN_FINAL_REVIEW_AUTHORIZED` |
+| Tasks | `NOT_AUTHORIZED` |
+| Implementation | `NOT_AUTHORIZED` |
+
+[Decisión] El Founder aprobó explícitamente Requirements v1.3 después del veredicto técnico `REQUIREMENTS_V1_3_APPROVE_WITH_NON_BLOCKING_NOTES`. Las secciones anteriores se preservan como evidencia histórica de las revisiones v1.2 y v1.3 previas a la decisión.
 
 ---
 

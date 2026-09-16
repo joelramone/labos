@@ -29,18 +29,18 @@ Este package define el framework completo de integración de Labs al ecosistema 
 |---|-----------|-----------|
 | 1 | [lab-integration-framework.md](./lab-integration-framework.md) | Framework completo de integración — qué significa integrar un Lab |
 | 2 | [lab-contract-template.md](./lab-contract-template.md) | Template del Lab Contract (15 secciones) con guía por sección |
-| 3 | [lab-integration-lifecycle.md](./lab-integration-lifecycle.md) | 6 etapas del ciclo de vida de integración |
-| 4 | [lab-boundaries.md](./lab-boundaries.md) | 4 clasificaciones de límites y reglas de propiedad |
-| 5 | [lab-maturity-model.md](./lab-maturity-model.md) | Framework dormido de madurez (L0-L4) |
-| 6 | [lab-integration-checklist.md](./lab-integration-checklist.md) | Checklist paso a paso por etapa del lifecycle |
+| 3 | `lab-integration-lifecycle.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; las 6 etapas resumidas permanecen en `lab-integration-framework.md` |
+| 4 | `lab-boundaries.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; no se infiere un reemplazo documental |
+| 5 | `lab-maturity-model.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; framework dormido, sin reemplazo inferido |
+| 6 | [lab-integration-checklist-v1.md](./lab-integration-checklist-v1.md) | Checklist vigente; mapping inequívoco del nombre histórico |
 | 7 | [crypto-scalping-core-lab-contract.md](./crypto-scalping-core-lab-contract.md) | Instanciación del Lab Contract para Crypto Scalping Core |
-| 8 | [crypto-scalping-core-integration-assessment.md](./crypto-scalping-core-integration-assessment.md) | Evaluación de readiness del Lab |
-| 9 | [crypto-scalping-core-capability-map.md](./crypto-scalping-core-capability-map.md) | Mapa de capacidades potenciales |
-| 10 | [crypto-scalping-core-knowledge-map.md](./crypto-scalping-core-knowledge-map.md) | Dominios de conocimiento relevantes |
-| 11 | [crypto-scalping-core-asset-inventory.md](./crypto-scalping-core-asset-inventory.md) | Inventario de activos (actual y proyectado) |
-| 12 | [crypto-scalping-core-integration-backlog.md](./crypto-scalping-core-integration-backlog.md) | Backlog priorizado de acciones de integración |
-| 13 | [package-001a-summary.md](./package-001a-summary.md) | Resumen del package: decisiones y entregables |
-| 14 | [package-001a-review.md](./package-001a-review.md) | Auto-review: completitud y preguntas abiertas |
+| 8 | `crypto-scalping-core-integration-assessment.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; no se sustituye por otro assessment |
+| 9 | `crypto-scalping-core-capability-map.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; no se infiere equivalencia |
+| 10 | `crypto-scalping-core-knowledge-map.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; no se infiere equivalencia |
+| 11 | `crypto-scalping-core-asset-inventory.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; no se sustituye por Candidates/readiness |
+| 12 | `crypto-scalping-core-integration-backlog.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; no se sustituye por remediation records posteriores |
+| 13 | `package-001a-summary.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; los batch summaries y closure record siguen separados |
+| 14 | `package-001a-review.md` — HISTORICAL_REFERENCE_MISSING | Target histórico no preservado; no se sustituye por el final audit |
 
 ### Batch 3 — Lab Contract & Compliance (2025-07-24)
 

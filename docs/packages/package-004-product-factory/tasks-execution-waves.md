@@ -2,14 +2,18 @@
 
 ## Authority
 
-These waves organize the Task DAG. W0 is `COMPLETE` under `FD-P004-W0-AUTH-001`, with evidence in `wave-0-baseline-integrity-record.md`. W1 is `COMPLETE` under `FD-P004-W1-AUTH-001`, with evidence in `wave-1-execution-record.md`. W2 is `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` under `FD-P004-W2-AUTH-001`. W3–W7 remain `PLANNED / NOT_AUTHORIZED_FOR_EXECUTION`.
+These waves organize the Task DAG. W0–W7 are `COMPLETE` under their recorded authorizations and execution evidence. W7 evidence is in `wave-7-execution-record.md`; Package closure remains separate.
 
 | Wave | Current authorization |
 |---|---|
 | W0 | `COMPLETE` |
 | W1 | `COMPLETE` |
-| W2 | `AUTHORIZED_FOR_EXECUTION / NOT_STARTED` |
-| W3–W7 | `NOT_AUTHORIZED_FOR_EXECUTION` |
+| W2 | `COMPLETE` |
+| W3 | `COMPLETE` |
+| W4 | `COMPLETE` |
+| W5 | `COMPLETE` |
+| W6 | `COMPLETE` |
+| W7 | `COMPLETE` |
 
 | Wave | Purpose | Tasks | Internal ordering | Exit evidence |
 |---|---|---|---|---|
@@ -30,4 +34,4 @@ These waves organize the Task DAG. W0 is `COMPLETE` under `FD-P004-W0-AUTH-001`,
 4. Any Requirements/Design/frozen-architecture change stops the affected branch for change control.
 5. W7 cannot mark Package 004 CLOSED; closure remains a separate Founder act.
 
-W0/T004-001 and W1/T004-002–005 are COMPLETE. W2/T004-006–010 is authorized but not started; its internal Task gates remain mandatory. No W3–W7 Task, controlled fixture or implementation has been authorized or executed. Next safe action: `PACKAGE_004_WAVE_2_EXECUTION`; do not execute W2 automatically.
+W0/T004-001 through W7/T004-032 are COMPLETE. Package 004 is `CLOSED` under `FD-P004-CLOSURE-001`; implementation and downstream Packages remain unauthorized/dormant.

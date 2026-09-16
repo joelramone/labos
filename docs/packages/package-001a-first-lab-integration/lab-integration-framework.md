@@ -86,7 +86,7 @@ Coherente con INV-05 (proporcionalidad de proceso a etapa): la complejidad de la
 └──────────┘    └───────────┘    └────────────────┘
 ```
 
-Las 6 etapas se detallan en [lab-integration-lifecycle.md](./lab-integration-lifecycle.md). [Hecho]
+El target histórico `lab-integration-lifecycle.md` no está preservado en el repositorio (`HISTORICAL_REFERENCE_MISSING`). Las 6 etapas resumidas en este documento permanecen como evidencia disponible; no se inventa un reemplazo. [Hecho]
 
 ---
 
@@ -121,8 +121,8 @@ Este framework extiende la definición de "Lab" de Package 000 sin redefinirla, 
 ## Cross-references
 
 - [lab-contract-template.md](./lab-contract-template.md) — Template de 15 secciones
-- [lab-integration-lifecycle.md](./lab-integration-lifecycle.md) — 6 etapas detalladas
-- [lab-boundaries.md](./lab-boundaries.md) — Clasificación de límites
+- `lab-integration-lifecycle.md` — HISTORICAL_REFERENCE_MISSING; no se infiere reemplazo
+- `lab-boundaries.md` — HISTORICAL_REFERENCE_MISSING; no se infiere reemplazo
 - [ADR-0001](../../decisions/0001-terminology-hierarchy.md) — Jerarquía terminológica
 - [ADR-0002](../../decisions/0002-asset-taxonomy-consolidation.md) — Taxonomía de activos
 - [Architecture Baseline v1.0](../../architecture/architecture-baseline-v1.md) — Invariantes
