@@ -116,6 +116,9 @@ Registro completo y categorizado de todos los documentos significativos del ecos
 | 42 | REG-042 | Future Infrastructure Register | docs/architecture/future-infrastructure-register.md | SUPPORTING | FUTURE / DORMANT | No | Sí — trigger registry |
 | 43 | REG-043 | Post-Package 003 Roadmap Review | docs/architecture/post-package-003-roadmap-review.md | SUPPORTING | REVIEWED | No | Sí — append-only review evidence |
 | 44 | REG-044 | Package 004 — Product Factory | docs/packages/package-004-product-factory/ | CANONICAL | CLOSED — FD-P004-CLOSURE-001 | No — post-baseline extension | No (INV-10) |
+| 45 | REG-045 | Reusable Lab Inception Template v1.1.0 | labs/lab-inception-template-v1.md | GOVERNING | REGISTERED | No — POST_BASELINE_GOVERNED_ARTIFACT | Sí — versionado explícito y aprobación del Founder |
+
+[Decisión] REG-045 identifica exclusivamente `LABOS-LAB-INCEPTION-TEMPLATE` v1.1.0, clasificación `GOVERNING_REUSABLE_ARTIFACT`, con governance owner `LabOS Founder Governance Authority` y SHA-256 `65344d5cf45bf4299e5ed2a8d6caaba6e7bcc186c23db1690d11ed0fbd063048`. Autoridad de registro: `FD-LABOS-REUSABLE-LAB-INCEPTION-TEMPLATE-REGISTRATION-001`, con la enmienda Cloud, la aclaración de estados y la renovación de baseline aplicables; excepción puntual `FD-LABOS-REG045-ONE-TIME-BASELINE-EXCEPTION-001` y autorizaciones Founder de esta conversación para el criterio de concurrencia local y la corrección de conteos. Baseline de ejecución: `8346d5f8476d8b8dc1712e25778e344e91d9910a`. Este registro local no crea ni activa Labs, no modifica el Architecture Baseline y no autoriza ejecución operativa. `MODIFY_BASELINE=NO`, `EXTENDS_BASELINE=NO`, `ADR_REQUIRED=NO`; Architecture Freeze permanece `PRESERVED`.
 
 ---
 
@@ -124,14 +127,14 @@ Registro completo y categorizado de todos los documentos significativos del ecos
 | Categoría | Cantidad | En Baseline | Mutable sin ADR |
 |-----------|----------|-------------|-----------------|
 | CANONICAL | 25 | 23 | No |
-| GOVERNING | 5 | 5 | No |
+| GOVERNING | 5 | 4 | No |
 | SUPPORTING | 10 | 5 | Sí (con trazabilidad) |
 | OPERATIONAL | 4 | 0 | Sí |
 | HISTORICAL | 1 | 1 | No (INV-10) |
 | PROPOSED | 0 | 0 | — |
-| **TOTAL** | **44** | **34** | — |
+| **TOTAL** | **45** | **33** | — |
 
-[Hecho] 34 documentos (o grupos documentales) permanecen en Architecture Baseline v1.0. Packages 003 and 004 are CLOSED post-baseline canonical extensions; the three post-P003 roadmap records are supporting and do not modify the frozen Baseline. Architecture Freeze remains PRESERVED.
+[Hecho] 33 documentos (o grupos documentales) permanecen en Architecture Baseline v1.0. Esta cifra corrige el resumen anterior mediante el recuento de las filas existentes; no cambia la pertenencia al baseline ni constituye un cambio arquitectónico. REG-045 es un registro GOVERNING fuera del baseline. Packages 003 and 004 are CLOSED post-baseline canonical extensions; the three post-P003 roadmap records are supporting and do not modify the frozen Baseline. Architecture Freeze remains PRESERVED.
 
 ---
 
